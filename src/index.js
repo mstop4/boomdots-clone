@@ -1,10 +1,11 @@
 import phaser from 'phaser'
 import { Preloader } from './scenes/preloader'
 import { Game } from './scenes/game'
+import { APP_WIDTH, APP_HEIGHT } from './setup'
 
 const config = {
-  width: 270,
-  height: 480,
+  width: APP_WIDTH,
+  height: APP_HEIGHT,
   parent: 'content',
   scene: [
     Preloader,

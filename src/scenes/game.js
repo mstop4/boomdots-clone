@@ -1,4 +1,8 @@
 import { Scene } from 'phaser'
+import { APP_WIDTH, APP_HEIGHT } from '../setup'
+
+const centerX = APP_WIDTH/2
+const centerY = APP_HEIGHT/2
 
 export class Game extends Scene {
   constructor() {
@@ -10,11 +14,16 @@ export class Game extends Scene {
   }
 
   create() {
-    this.staticBg = this.add.image(135, 240, 'bg-static')
+    this.staticBg = this.add.image(centerX, centerY, 'bg-static')
     this.staticBg.setTint(0x444444)
     this.staticBg.setOrigin(0.5)
-    this.scrollingBg = this.add.tileSprite(135, 240, 396, 529, 'bg-overlay')
+
+    this.scrollingBg = this.add.tileSprite(centerX, centerY, 396, 529, 'bg-overlay')
     this.scrollingBg.setOrigin(0.5)
+
+    this.rocket = this.add.sprite(centerX, centerY+160, 'rocket')
+
+    this.alien = this.add.sprite(centerX, centerY-150, 'alien')
 
     this.sys.game.events.on('resize', this.resize, this)
     this.resize()
