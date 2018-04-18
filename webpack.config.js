@@ -40,26 +40,15 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      path: path.resolve(__diname, 'build', 'index.html'),
+      path: path.resolve(__dirname, 'build', 'index.html'),
       template: 'index.html'
     }),
 
     // https://webpack.js.org/plugins/hashed-module-ids-plugin
     new webpack.HashedModuleIdsPlugin(),
 
-    // https://webpack.js.org/plugins/commons-chunk-plugin/
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-
-    new webpack.optimize.CommonChunksPlugin({
-      name: 'manifest'
-    }),
-
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-      sourceMap: true
-    }),
+    // https://webpack.js.org/plugins/split-chunks-plugin/
+    new webpack.optimize.SplitChunksPlugin(),
 
     // ßhttps://webpack.js.org/plugins/copy-webpack-plugin/
     new CopyWebpackPlugin([
