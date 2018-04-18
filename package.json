@@ -2,6 +2,10 @@
   "name": "boomdots-clone",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
   "author": "mstop4 <mstop4@gmail.com>",
   "license": "MIT",
   "dependencies": {
