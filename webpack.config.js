@@ -21,7 +21,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.join(__dirname, 'src',),
+        include: path.join(__dirname, 'src'),
         loader: 'babel-loader'
       },
       {
@@ -35,7 +35,7 @@ module.exports = {
     new CleanWebpackPlugin('build'),
 
     new webpack.DefinePlugin({
-      "CANVAS_RENDERER": JSON.stringify(true),
+      'CANVAS_RENDERER': JSON.stringify(true),
       'WEBGL_RENDERER': JSON.stringify(true)
     }),
 
