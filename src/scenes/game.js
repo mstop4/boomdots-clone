@@ -11,6 +11,8 @@ export class Game extends Scene {
     })
     this.staticBg = null
     this.scrollingBg = null
+    this.alienTargetY = centerY
+    this.canUpdateAlien = false
   }
 
   create() {
@@ -23,7 +25,8 @@ export class Game extends Scene {
 
     this.rocket = this.add.sprite(centerX, centerY+160, 'rocket')
 
-    this.alien = this.add.sprite(centerX, centerY-150, 'alien')
+    this.alien = this.add.sprite(centerX, centerY-300, 'alien')
+    this.resetAlien()
 
     this.sys.game.events.on('resize', this.resize, this)
     this.resize()
@@ -37,11 +40,26 @@ export class Game extends Scene {
     //cam.zoom = Math.max(window.innerWidth/270, window.innerHeight/480)
   }
 
-  update() {
+  update(time, delta) {
     this.scrollingBg.tilePositionY--
+    if (this.canUpdateAlien) {
+      this.moveAlien(time, delta)
+    }
   }
 
   shutdown() {
     this.sys.game.events.off('resize', this.resize, this)
+  }
+
+  moveAlien(time, delta) {
+    //console.log(delta)
+    this.alien.y += (this.alienTargetY - this.alien.y) * (delta/1000)
+    this.alien.x = centerX + Math.sin(time * 0.005) * 80
+  }
+
+  resetAlien() {
+    this.canUpdateAlien = true
+    this.alien.x = centerX
+    this.alien.y = centerY-300
   }
 }
