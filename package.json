@@ -3,5 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "mstop4 <mstop4@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "phaser": "^3.5.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^4.6.0",
+    "webpack-dev-server": "^3.1.3"
+  }
 }
