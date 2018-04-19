@@ -19,6 +19,8 @@ export class Game extends Scene {
     this.scrollingBg = null
     this.alienTargetY = centerY
     this.canUpdateAlien = false
+    this.particles = null
+    this.emitter = null
   }
 
   create() {
@@ -33,6 +35,19 @@ export class Game extends Scene {
     this.alien = this.add.sprite(centerX, centerY-300, 'alien')
     this.physics.world.enable([this.rocket, this.alien])
     this.resetAlien()
+
+    this.particles = this.add.particles('particle')
+    this.emitter = this.particles.createEmitter({
+      angle: { min: 0, max: 360 },
+      speed: { min: 50, max: 200 },
+      quantity: { min: 40, max: 50 },
+      lifespan: { min: 200, max: 500 },
+      alpha: { start: 1, end: 0 },
+      scale: { min: 0.5, max: 0.5 },
+      rotate: { start: 0, end: 360 },
+      gravityY: 800,
+      on: false
+    })
 
     this.input.on('pointerdown', this.launchRocket, this)
 
@@ -62,13 +77,18 @@ export class Game extends Scene {
   }
 
   launchRocket() {
-    this.rocket.body.setVelocity(0, -300)
+    this.rocket.body.setVelocity(0, -1500)
   }
 
   rocketCollideWithAlien(rocket, alien) {
+    if (!this.canUpdateAlien) {
+      return
+    }
     this.canUpdateAlien = false
     rocket.body.setVelocity(0)
+    this.particles.emitParticleAt(alien.x, alien.y)
     alien.y = centerY-300
+    this.cameras.main.shake(100, 0.01, 0.01)
   }
 
   moveAlien(time, delta) {

@@ -12,6 +12,7 @@ export class Preloader extends phaser.Scene {
     this.load.image('bg-overlay', 'assets/bg.png')
     this.load.image('rocket', 'assets/rocket.png')
     this.load.image('alien', 'assets/alien.png')
+    this.load.image('particle', 'assets/squareparticle.png')
   }
 
   create() {
