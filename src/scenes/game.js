@@ -1,10 +1,10 @@
-import { Scene } from 'phaser'
+import phaser from 'phaser'
 import { APP_WIDTH, APP_HEIGHT } from '../setup'
 
 const centerX = APP_WIDTH/2
 const centerY = APP_HEIGHT/2
 
-export class Game extends Scene {
+export class Game extends phaser.Scene {
   constructor() {
     super({
       key: 'game',
@@ -21,6 +21,7 @@ export class Game extends Scene {
     this.canUpdateAlien = false
     this.particles = null
     this.emitter = null
+    this.isRocketResetting = false
   }
 
   create() {
@@ -65,9 +66,22 @@ export class Game extends Scene {
 
   update(time, delta) {
     this.scrollingBg.tilePositionY--
+
     if (this.canUpdateAlien) {
       this.moveAlien(time, delta)
       this.physics.add.overlap(this.rocket, this.alien, this.rocketCollideWithAlien, null, this)
+    }
+
+    if (this.isRocketResetting) {
+      this.scrollingBg.tilePositionY -= delta
+      this.rocket.y += delta
+      if (this.rocket.y >= 160) {
+        this.rocket.y = 160
+        this.isRocketResetting = false
+        this.resetAlien()
+      }
+    } else if (this.rocket.y < 0) {
+      this.resetRocket()
     }
   }
 
@@ -89,6 +103,7 @@ export class Game extends Scene {
     this.particles.emitParticleAt(alien.x, alien.y)
     alien.y = centerY-300
     this.cameras.main.shake(100, 0.01, 0.01)
+    this.time.delayedCall(200, this.resetRocket, [], this)
   }
 
   moveAlien(time, delta) {
@@ -100,5 +115,10 @@ export class Game extends Scene {
     this.canUpdateAlien = true
     this.alien.x = centerX
     this.alien.y = centerY-300
+    this.alienTargetY = phaser.Math.Between(-200,0)
+  }
+
+  resetRocket() {
+    this.isRocketResetting = true
   }
 }
