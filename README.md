@@ -1,8 +1,9 @@
 # Boomdots with Phaser 3 + Webpack + ES6
 
-## Differences from Tutorial
+An attempt to follow the tutorial at http://codetuto.com/2018/02/getting-started-phaser-3-es6-create-boomdots-game/.
+Game is incomplete because the tutorial is incomplete and buggy.
 
-http://codetuto.com/2018/02/getting-started-phaser-3-es6-create-boomdots-game/
+## Differences from Tutorial
 
 ### Stylistic Choices
 
